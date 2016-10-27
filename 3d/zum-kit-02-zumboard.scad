@@ -50,7 +50,7 @@ difference() {
             translate( [ 0, 0, 1 ] ) linear_extrude( height = 3 ) offset( r = -1 ) zum_inside();
 
         }
-        hull() linear_extrude( height = 4 ) translate( [ 24.5, 16.5 ] ) holes( d = 5 );
+        hull() linear_extrude( height = 3 ) translate( [ 24.5, 16.5 ] ) holes( d = 5 );
     }
     // holes
     linear_extrude( height = 10 ) translate( [ 24.5, 16.5 ] ) holes();
