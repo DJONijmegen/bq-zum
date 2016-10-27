@@ -1,3 +1,3 @@
-use <zum_hexmodule.scad>;
+use <zum-hexmodule.scad>;
 
 zum_hexmodule();

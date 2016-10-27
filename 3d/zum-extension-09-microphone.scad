@@ -1,4 +1,4 @@
-use <zum_hexmodule.scad>;
+use <zum-hexmodule.scad>;
 
 $fn  = 90;
 

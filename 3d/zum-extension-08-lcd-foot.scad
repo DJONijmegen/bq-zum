@@ -1,3 +1,3 @@
-use <zum_extension_08_lcd.scad>;
+use <zum-extension-08-lcd.scad>;
 
 foot();

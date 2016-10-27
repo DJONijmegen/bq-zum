@@ -1,4 +1,4 @@
-use <zum_long_hexmodule.scad>;
+use <zum-long-hexmodule.scad>;
 
 zum_hexmodule();
 
