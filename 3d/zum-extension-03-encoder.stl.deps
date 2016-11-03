@@ -1,0 +1,3 @@
+zum-extension-03-encoder.stl: \
+	/home/denz/Projects/DJONijmegen/bq-zum/3d/zum-hexmodule.scad \
+	zum-extension-03-encoder.scad

@@ -2,44 +2,64 @@
 // hexagonal module
 
 $fn = 90;
-drill = 2;
+$drill = 2;
 
-module holes() {
-    d = 20;
-    translate( [ -d/2, 0, -1 ] ) cylinder( d = drill, h = 11 );
-    translate( [ d/2, 0, -1 ] ) cylinder( d = drill, h = 11 );
+module holes( d = 20 ) {
+    translate( [ -d/2, 0 ] ) circle( d = $drill );
+    translate( [ d/2, 0  ] ) circle( d = $drill );
 }
 
-module hexagon( ) {
-    h = 27.5;
-    b = 27.5;
-    
+module hexagon( 
+    h = 26.5,
+    ccw = 26.5,
+    cw = 26.5,
+) {
     intersection() {
-        square( [ 100, h ], center = true );
-        rotate( 60 ) square( [ 100, b ], center = true );
-        rotate( -60 ) square( [ 100, b ], center = true );
-    }
-    
+        square( [ ccw + cw, h ], center = true );
+        rotate( 60 ) square( [ h + cw, ccw ], center = true );
+        rotate( -60 ) square( [ h + ccw, cw ], center = true );
+    }   
 }
 
-module zum_hexmodule_clearance( h = 27.5 ) {
-    ri = h/2;
-    ro = ri / ( 0.5 * sqrt(3) );
-    translate( [ -ro/2, -ri, -2 ] ) cube( [ ro, ri * 2, 2 ] );
-    translate( [ -ro/2, ri/2, 1 ] ) cube( [ ro, ri, 8 ] );
-    
-}
-
-module zum_hexmodule() {
+module zum_hexmodule(
+    h = 26,
+    ccw = 26,
+    cw = 26,
+    d = 20
+) {
     difference() {
-        linear_extrude( height = 5 ) offset( r = 1 ) hexagon();
-        translate( [ 0, 0, 3 ] ) {
-            linear_extrude( height = 5 ) hexagon();
-            zum_hexmodule_clearance();
+        union() {
+            difference() {
+                linear_extrude( height = 5 ) offset( r = 1 ) hexagon( h, ccw, cw );
+                translate( [ 0, 0, 1 ] )
+                    linear_extrude( height = 5 ) offset( r = -1 ) hexagon( h, ccw, cw );
+                translate( [ 0, 0, 3 ] )
+                    linear_extrude( height = 5 ) hexagon( h, ccw, cw ); 
+            }
+            linear_extrude( height = 3 ) offset( r = ( 6 - $drill ) /2 ) holes( d );
         }
-        holes();
+        linear_extrude( height = 5 ) holes( d );
+        translate( [ -ccw / 4, 0, 4 ] ) cube( [ ccw / 2, h / 2 + 5, 5 ] ); 
     }
 }
 
-zum_hexmodule();
+*zum_hexmodule(
+    h = 26,
+    ccw = 26,
+    cw = 26,
+    d = 20
+);
 
+*zum_hexmodule(
+    h = 26.5,
+    ccw = 36.25,
+    cw = 36.25,
+    d = 32
+);
+
+zum_hexmodule(
+    h = 36.15,
+    ccw = 38.25,
+    cw = 38.25,
+    d = 32
+);
